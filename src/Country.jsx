@@ -11,7 +11,9 @@ const CountryData = () => {
     const[city,setCity] = useState([]);
     const [selectedCity,setSelectedCity] = useState('');
     const [isCityDisable,setIsCityDisable] = useState(true);
+    const [showLabel,setShowLabel] = useState(false);
     useEffect(() => {
+        setShowLabel(false);
         fetch(API_URL)
         .then((res) => res.json())
         .then((res) => setCountry(res))
@@ -20,6 +22,9 @@ const CountryData = () => {
     const handleOnCountryChange = async (event) => {
         let SelectedContry = event.target.value;
         setSelectedCountry(SelectedContry)
+        setShowLabel(false)
+        setSelectedCity([])
+        setSelectedState([])
         if(SelectedContry){
             try {
                const response = await fetch(`https://crio-location-selector.onrender.com/country=${SelectedContry}/states`);
@@ -37,6 +42,7 @@ const CountryData = () => {
     const handleOnStateChange = async (event) => {
         let stateSelected = event.target.value;
         setSelectedState(stateSelected);
+        setSelectedCity([]);
         try {
             const res = await fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${stateSelected}/cities`);
             const data = await res.json();
@@ -48,6 +54,7 @@ const CountryData = () => {
         }
     }
     const handleOnCityChange = async (event) => {
+        setShowLabel(true);
         setSelectedCity(event.target.value);
     }
     return(
@@ -77,7 +84,7 @@ const CountryData = () => {
                         ))
                     }
                 </select>
-                {selectedCity ? <div style={{marginTop:'20px' , fontWeight:'bold', fontSize:'20px'}}>You Selected {selectedCity}, {selectedState}, {selectedCountry}</div>: ''}
+                {showLabel ? <div style={{marginTop:'20px' , fontWeight:'bold', fontSize:'20px'}}>You Selected {selectedCity}, {selectedState}, {selectedCountry}</div>: ''}
             </div>
     )
 }
