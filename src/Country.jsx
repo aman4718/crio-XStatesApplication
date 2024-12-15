@@ -54,8 +54,8 @@ const CountryData = () => {
         }
     }
     const handleOnCityChange = async (event) => {
-        setShowLabel(true);
         setSelectedCity(event.target.value);
+        setShowLabel(true);
     }
     return(
             <div>
