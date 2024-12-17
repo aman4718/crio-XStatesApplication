@@ -84,7 +84,7 @@ const CountryData = () => {
                         ))
                     }
                 </select>
-                {showLabel ? <div style={{marginTop:'20px' , fontWeight:'bold', fontSize:'20px'}}>You Selected {selectedCity}, {selectedState}, {selectedCountry}</div>: ''}
+                {showLabel ? <div style={{marginTop:'20px' , fontWeight:'bold', fontSize:'20px'}}>You selected {selectedCity}, {selectedState}, {selectedCountry}</div>: ''}
             </div>
     )
 }
